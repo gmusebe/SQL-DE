@@ -102,3 +102,14 @@ SELECT TOP 3 *
 FROM customers
 ORDER BY score DESC;
 
+-- Coding & Execution Order:
+--        5.      |   7.
+-- SELECT DISTINCT TOP 2
+--  col1,
+--  SUM(col2)
+-- 1. FROM Table
+-- 2. WHERE Col = 10
+-- 3. GROUP BY col1
+-- 4. HAVING SUM(col2) > 30
+-- 6. ORDER BY col 1 ASC;
+
