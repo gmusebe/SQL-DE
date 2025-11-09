@@ -92,3 +92,22 @@ FROM customers as c
 FULL JOIN orders as b
 ON c.id = b.customer_id
 WHERE b.customer_id is NOT NULL AND c.id is NOT NULL
+
+-- Multiple Table Join
+USE SalesDB;
+
+
+SELECT
+	O.OrderID,
+	C.FirstName,
+	P.Product,
+	O.Sales,
+	P.Price,
+	E.FirstName
+FROM Sales.Orders AS O
+LEFT JOIN Sales.Customers AS C
+ON C.CustomerID = O.CustomerID
+LEFT JOIN Sales.Products AS P
+ON O.ProductID = P.ProductID
+LEFT JOIN Sales.Employees AS E
+ON E.EmployeeID = O.SalesPersonID;
