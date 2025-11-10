@@ -81,3 +81,13 @@ SELECT
 	first_name,
     SUBSTRING(first_name, 2, LEN(first_name))
 FROM customers;
+
+
+-- ROUND
+SELECT 3.512,
+ROUND(3.512, 2) AS round_2;
+
+-- ABSOLUTE (ABS)
+SELECT -3.512,
+ABS(-3.512) AS absolute;
+
