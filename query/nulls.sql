@@ -52,3 +52,14 @@ SELECT
  Score
 FROM sales.Customers
 ORDER BY CASE WHEN Score IS NULL THEN 1 ELSE 0  END, Score
+
+-- Value to NULL
+-- NULLIF - Accepts two values
+-- Use Case: Prevention the error of dividing by zero
+SELECT 
+ OrderID,
+ ProductID,
+ Sales,
+ Quantity,
+ Sales/ NULLIF(Quantity,0) AS Price
+FROM sales.Orders
