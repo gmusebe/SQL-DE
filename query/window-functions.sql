@@ -81,6 +81,8 @@ FROM Sales.Orders
 
 -- FRAME CLAUSE
 -- Define a subset of rows within each window that is relevant to the calculation
+USE SalesDB;
+
 SELECT
 	OrderID,
 	OrderDate,
@@ -91,3 +93,41 @@ SELECT
 		ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING
 	) TotalSales
 FROM Sales.Orders
+
+SELECT
+	OrderID,
+	OrderDate,
+	OrderStatus,
+	Sales,
+	SUM(Sales) OVER (
+		PARTITION BY OrderStatus ORDER BY OrderDate
+		ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+	) TotalSales
+FROM Sales.Orders
+
+-- SAME AS
+-- SHORTCUT WORK WITH PRECEDING
+SELECT
+	OrderID,
+	OrderDate,
+	OrderStatus,
+	Sales,
+	SUM(Sales) OVER (
+		PARTITION BY OrderStatus ORDER BY OrderDate
+		ROWS 2 PRECEDING
+	) TotalSales
+FROM Sales.Orders
+
+SELECT
+	OrderID,
+	OrderDate,
+	OrderStatus,
+	Sales,
+	SUM(Sales) OVER (
+		PARTITION BY OrderStatus ORDER BY OrderDate
+		ROWS UNBOUNDED PRECEDING
+	) TotalSales
+FROM Sales.Orders
+
+-- ORDER BY USING AGGREGATE FUNCTION HAS A HIDDEN FRAME
+-- ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 
