@@ -131,3 +131,26 @@ FROM Sales.Orders
 
 -- ORDER BY USING AGGREGATE FUNCTION HAS A HIDDEN FRAME
 -- ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 
+
+-- RULES
+-- 1. Window Functions can be used only in SELECT  & ORDER BY clauses
+-- 2. Nesting Window Functions is not allowed
+-- 3. SQL executes Window Functions  after WHERE clause
+SELECT
+	OrderID,
+	OrderDate,
+	OrderStatus,
+	ProductID,
+	Sales,
+	SUM(Sales) OVER (PARTITION BY OrderStatus) TotalSales
+FROM Sales.Orders
+WHERE ProductID IN (101,102)
+
+-- 4. Window Functions can be used together with the GROUP BY clause only if you use same columns
+-- Rank customers based on their total sales
+SELECT
+	CustomerID,
+	SUM(Sales) TotalSales,
+	RANK() OVER (ORDER BY SUM(Sales) DESC) RankCustomers
+FROM Sales.Orders
+GROUP BY CustomerID 
