@@ -81,3 +81,13 @@ FROM Sales.Orders
 
 -- FRAME CLAUSE
 -- Define a subset of rows within each window that is relevant to the calculation
+SELECT
+	OrderID,
+	OrderDate,
+	OrderStatus,
+	Sales,
+	SUM(Sales) OVER (
+		PARTITION BY OrderStatus ORDER BY OrderDate
+		ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING
+	) TotalSales
+FROM Sales.Orders
