@@ -7,7 +7,7 @@ SELECT
 FROM sales.orders
 
 -- Allows any datatype:
--- Find Total number of orders
+-- Find Total number of ord Counters
 SELECT
     COUNT(ProductID) OVER(PARTITION BY ProductID)
 FROM sales.orders
