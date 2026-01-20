@@ -100,4 +100,53 @@ FROM(
 WHERE Sales > AvgSales
 
 
--- #RUNNING & ROLLING TOTAL 
+
+-- MIN & MAX
+SELECT *
+FROM(
+	SELECT
+		*,
+		MAX(Salary) OVER () HighestSalary
+	FROM Sales.Employees
+)t
+WHERE Salary = HighestSalary;
+
+
+-- Find the deviation of each sales from the minimum and maximum sales amounts
+SELECT
+	OrderID,
+	OrderDate,
+	ProductID,
+	Sales,
+	MAX(Sales) OVER() HighestSales,
+	MIN(Sales) OVER() LowestSales,
+	Sales - MIN(Sales) OVER() DeviationFromMin,
+	MAX(Sales) OVER() - Sales DeviationFromMax
+FROM
+	Sales.Orders
+
+-- ANALYSIS OVER TIME
+-- #RUNNING & ROLLING TOTAL
+-- Calculate the moving averages of sales for each product overtime
+SELECT 
+	OrderID,
+	ProductID,
+	OrderDate,
+	Sales,
+	AVG(Sales) OVER(PARTITION BY ProductID) AvgByProduct,
+	AVG(Sales) OVER(PARTITION BY ProductID ORDER BY OrderDate) MovingAvg -- MOVING AVERAGE
+FROM
+	Sales.Orders;
+
+
+-- Calculate the moving Average of sales for each product over time, including only the next order
+-- Limited to two orders
+SELECT 
+	OrderID,
+	ProductID,
+	OrderDate,
+	Sales,
+	AVG(Sales) OVER(PARTITION BY ProductID) AvgByProduct,
+	AVG(Sales) OVER(PARTITION BY ProductID ORDER BY OrderDate ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) RollingAvg -- ROLLING AVERAGE
+FROM
+	Sales.Orders;
