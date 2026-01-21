@@ -68,9 +68,61 @@ FROM Sales.OrdersArchive
 )t
 WHERE rn = 1;
 
---#CATEGORY 2: DISTRIBUTION
+--#CATEGORY 2: DISTRIBUTION [PERCENTAGE BASED RANKING]
 -- PERCENT_RANK()
--- CUME_DIST()
+-- REALTIVE POSITION OF EACH ROW
+-- PositionNr - 1/No.OfRows
 
+-- CUME_DIST()
+-- CUMULATIVE DISTRIBUTION: Distribution of Data Point within a Window
+-- PositionNr/No.OfRows
+
+-- Find the Products that fall within the highest 40% of prices
+SELECT
+	*,
+	CONCAT(DistRank*100, '%') [DistRank%]
+FROM (
+	SELECT 
+		Product,
+		Price,
+		CUME_DIST()  OVER(ORDER BY Price DESC) DistRank
+	FROM Sales.Products
+	)t
+WHERE DistRank <=0.4;
 
 -- NTILE(n)
+-- Divide Rows into Specified Number of Approximately Equal Groups
+-- Bucket Size = No.OfRows/No.OfBuckets
+SELECT
+	OrderID,
+	Sales,
+	NTILE(2) OVER(ORDER BY Sales DESC) TwoBucket,
+	NTILE(3) OVER(ORDER BY Sales DESC) ThreeBucket
+FROM 
+	Sales.Orders
+
+-- d-ANALYST
+-- DATA SEGMENTATION
+--Segment All Orders in 3 Categories
+SELECT
+	*,
+	CASE
+		WHEN Buckets = 1 THEN 'High'
+		WHEN Buckets = 2 THEN 'Medium'
+		ELSE 'Low'
+	END Categories
+FROM(
+	SELECT 
+		OrderID,
+		Sales,
+		NTILE(3) OVER(ORDER BY Sales DESC) Buckets
+	FROM Sales.Orders
+)t
+
+-- d-ENGINEER
+-- ETL PROCESSING
+-- LOAD BALANCING
+SELECT
+	NTILE(2) OVER(ORDER BY OrderID) Buckets,
+	*
+FROM Sales.Orders;
