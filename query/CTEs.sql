@@ -60,28 +60,24 @@ ON ccs.CustomerID =c.CustomerID
 
 -- RECURSIVE CTEs
 -- Generate a sequence of numbers 1 - 20
-
 WITH Series AS (
 -- ANCHOR QUERY
 SELECT 
 	1 AS MyNumber
-	UNION ALL
-
-	--RECURSIVE QUERY
-	SELECT
-		MyNumber + 1
-	FROM Series
-	WHERE MyNumber < 20
+UNION ALL
+--RECURSIVE QUERY
+SELECT
+	MyNumber + 1
+FROM Series
+WHERE MyNumber < 20
 )
 
 -- MAIN QUERY
 SELECT *
 FROM Series
-OPTION(MAXRECURSION 10)
+OPTION(MAXRECURSION 20)
 
-
--- Show Employee Hierarchy and displaying  enployee's level in the Organisation
-
+-- Show Employee Hierarchy and displaying  each employee's level whithin the Organisation
 WITH CTE_EmpHierarchy AS (
 	-- ANCHOR QUERY
 	SELECT
