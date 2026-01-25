@@ -9,10 +9,12 @@ CREATE VIEW Sales.V_Monthly_Summary	AS (
 	GROUP BY DATETRUNC(month, OrderDate)
 )
 
+/*
 -- DELETE/DROP VIEWS
 DROP VIEW V_Monthly_Summary
+*/
 
-
+/*
 CREATE VIEW Sales.V_Order_Details AS (
 	-- Provide VIEW that combines details from orders, products, customers,  and employees
 	SELECT
@@ -35,3 +37,4 @@ CREATE VIEW Sales.V_Order_Details AS (
 	LEFT JOIN Sales.Employees e
 	ON e.EmployeeID = o.SalesPersonID
 )
+*/
