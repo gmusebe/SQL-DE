@@ -9,6 +9,7 @@ FROM INFORMATION_SCHEMA.COLUMNS
 
 -- Subquery in the FROM Clause [TABLE SUBQUERY]
 -- Find the products that have a higher price  than the average price of all products
+USE SalesDB;
 
 SELECT
 	*
