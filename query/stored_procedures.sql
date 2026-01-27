@@ -25,20 +25,20 @@ END;
 EXEC GetCustomerSummary;
 
 
--- PARAMETERS
--- For German Customers  Find the total number of customers and the average score:
 GO
-ALTER PROCEDURE GetCustomerSummaryGermany AS
+CREATE PROCEDURE GetCustomerSummaryGermany AS
 BEGIN
-SELECT
-    COUNT(*) TotalCustomers,
-    AVG(Score) AvgScore
-FROM Sales.Customers
-WHERE Country = 'Germany'
-END
+
+    SELECT
+        COUNT(*) TotalCustomers,
+        AVG(Score) AvgScore
+    FROM Sales.Customers
+    WHERE Country = 'Germany'
+END;
+
 
 -- Execute the Stored Procedure
-EXEC GetCustomerSummary;
+EXEC GetCustomerSummaryGermany;
 
 
 -- PARAMETERS
