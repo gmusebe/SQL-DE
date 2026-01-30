@@ -87,3 +87,36 @@ ON FactInternetSales_CS
 
 
 -- Check Storages
+EXEC sp_spaceused FactInternetSales_HP;
+
+EXEC sp_spaceused FactInternetSales_RS;
+
+EXEC sp_spaceused FactInternetSales_CS;
+
+
+-- UNIQUE INDEX
+-- WRITING Very slow, READING very quick
+-- CREATE [UNIQUE] [CLUSTERED | NONCLUSTERED | CLUSTERED] [COLUMNSTORE] Index_name ON table_name(col1, col2)
+
+SELECT *
+FROM Sales.Products;
+
+CREATE UNIQUE NONCLUSTERED INDEX idx_Products_Product 
+ON Sales.Products (Product)
+
+
+INSERT INTO Sales.Products (ProductID, Product) VALUES
+    (106, 'Caps')
+
+
+-- FILTER INDEX
+-- Include Rows that meet the specified conditions
+
+SELECT *
+FROM Sales.Customers
+WHERE Country = 'USA';
+
+
+CREATE NONCLUSTERED INDEX idx_Customers_Country
+ON Sales.Customers (Country)
+WHERE Country = 'USA';
