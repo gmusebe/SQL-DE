@@ -202,7 +202,7 @@ BEGIN
 END;
 
 
-SELECT * FROM Sales.EmployeeLogs
+SELECT * FROM Sales.EmployeeLogs;
 
 INSERT INTO Sales.Employees
 VALUES
