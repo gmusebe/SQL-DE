@@ -1,8 +1,29 @@
+/* ============================================================================== 
+   SQL Filtering Data
+-------------------------------------------------------------------------------
+   This document provides an overview of SQL filtering techniques using WHERE 
+   and various operators for precise data retrieval.
+
+   Table of Contents:
+     1. Comparison Operators
+        - =, <>, >, >=, <, <=
+     2. Logical Operators
+        - AND, OR, NOT
+     3. Range Filtering
+        - BETWEEN
+     4. Set Filtering
+        - IN
+     5. Pattern Matching
+        - LIKE
+=================================================================================
+*/
+
 -- Filtering Data
 USE MyDatabase;
 
-
--- COMPARISON OPERATOR
+/* ============================================================================== 
+   COMPARISON OPERATORS
+=============================================================================== */
 -- Retrieve all customers from Germany
 -- = Equal
 SELECT *
@@ -39,7 +60,9 @@ FROM customers
 WHERE score <= 500;
 
 
--- LOGICAL OPERATORS
+/* ============================================================================== 
+   LOGICAL OPERATORS
+=============================================================================== */
 -- AND; All conditions must be true.
 SELECT *
 FROM customers
@@ -57,7 +80,9 @@ FROM customers
 WHERE NOT score < 500;
 
 
--- RANGE OPERATOR: BETWEEN
+/* ============================================================================== 
+   RANGE FILTERING - BETWEEN
+=============================================================================== */
 -- Check if value is between a given range
 SELECT *
 FROM customers
@@ -68,6 +93,9 @@ SELECT *
 FROM customers
 WHERE score >= 100 AND score <= 500;
 
+/* ============================================================================== 
+   SET FILTERING - IN
+=============================================================================== */
 -- MEMBERSHIP: IN & NOT IN
 -- Works with lists.
 SELECT *
@@ -79,7 +107,9 @@ SELECT *
 FROM customers
 WHERE country = 'Germany' OR country = 'USA';
 
-
+/* ============================================================================== 
+   PATTERN MATCHING - LIKE
+=============================================================================== */
 -- SEARCH OPERATOR: LIKE
 -- Search for pattern in text
 -- All customers whose name start with an M
