@@ -52,5 +52,5 @@ DROP COLUMN phone;
    DROP
 =============================================================================== */
 
--- DROP TABLE
+-- Delete the entire persons table
 DROP TABLE persons;
