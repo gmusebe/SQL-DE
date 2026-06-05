@@ -130,25 +130,25 @@ ORDER BY score DESC;
 
 -- Find the total score for each country
 SELECT
-    country    Country,
-    SUM(score) TotalScore
+    country     AS Country,
+    SUM(score)  AS TotalScore
 FROM customers
 GROUP BY country;
 
 /* This will not work because 'first_name' is neither part of the GROUP BY 
    nor wrapped in an aggregate function. SQL doesn't know how to handle this column. */
-SELECT 
-    country,    Country,
-    first_name  FirstName,
-    SUM(score)  TotalScore
+SELECT
+    country     AS Country,
+    first_name  AS FirstName,
+    SUM(score)  AS TotalScore
 FROM customers
 GROUP BY country;
 
 -- Find the total score and total number of customers for each country
 SELECT
     country,
-    SUM(score) TotalScore,
-    COUNT(id)  NoOfCustomers
+    SUM(score) AS TotalScore,
+    COUNT(id)  AS NoOfCustomers
 FROM customers
 GROUP BY country;
 
