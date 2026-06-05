@@ -25,26 +25,29 @@
 =============================================================================== */
 USE MyDatabase;
 
--- No Join
-/* Retrieve all data from customers and orders as separate results */
+/* -------------------------------------------------------------------------------
+No Join
+------------------------------------------------------------------------------- */
+--  Retrieve all data from customers and orders as separate results
 SELECT *
 FROM customers;
 
 SELECT *
 FROM orders;
 
--- INNER JOIN
-/* Get all customers along with their orders, 
-   but only for customers who have placed an order */
+/* -------------------------------------------------------------------------------
+INNER JOIN
+------------------------------------------------------------------------------- */
+-- Get all customers along with their orders, but only for customers who have placed an order */
 SELECT
-	id,
-	first_name,
-	country,
-	score,
-	sales
-FROM customers
-INNER JOIN orders
-ON customers.id = orders.customer_id
+	ctm.id,
+	ctm.first_name,
+	ctm.country,
+	ctm.score,
+	odr.sales
+FROM customers ctm
+INNER JOIN orders odr
+ON ctm.id = odr.customer_id
 
 -- Alternative to INNER JOIN using LEFT JOIN
 /* Get all customers along with their orders, 
@@ -55,9 +58,10 @@ LEFT JOIN orders AS o
 ON c.id = o.customer_id
 WHERE o.customer_id IS NOT NULL
 
--- LEFT JOIN
-/* Get all customers along with their orders, 
-   including those without orders */
+/* -------------------------------------------------------------------------------
+LEFT JOIN
+------------------------------------------------------------------------------- */
+-- Get all customers along with their orders, including those without orders
 SELECT
 	id,
 	first_name,
@@ -67,14 +71,16 @@ FROM customers as c
 LEFT JOIN orders as o
 ON c.id = o.customer_id
 
--- RIGHT JOIN
-/* Get all customers along with their orders, 
-   including orders without matching customers */
+/* -------------------------------------------------------------------------------
+RIGHT JOIN
+------------------------------------------------------------------------------- */
+--  Get all customers along with their orders,including orders without matching customers */
 SELECT
-	id,
-	first_name,
+   o.customer_id,
+	c.id,
+	c.first_name,
 	o.order_id,
-	sales
+	o.sales
 FROM customers as c
 RIGHT JOIN orders as o
 ON c.id = o.customer_id
@@ -91,10 +97,12 @@ FROM orders as o
 LEFT JOIN customers as c
 ON c.id = o.customer_id
 
-
--- FULL JOIN
-/* Get all customers and all orders, even if there’s no match */
+/* -------------------------------------------------------------------------------
+FULL JOIN
+------------------------------------------------------------------------------- */
+-- Get all customers and all orders, even if there’s no match
 SELECT
+   o.customer_id,
 	c.id,
 	c.first_name,
 	o.order_id,
