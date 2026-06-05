@@ -53,7 +53,9 @@ VALUES
 SELECT *
 FROM customers;
 
-/* #2 Method: INSERT DATA USING SELECT - Moving Data From One Table to Another */
+/*-------------------------------- 
+#2 Method: INSERT DATA USING SELECT - Moving Data From One Table to Another
+--------------------------------*/
 -- Copy data from the 'customers' table into 'persons'
 
 -- Confirm the table exists before creating it, if it exists drop it first
