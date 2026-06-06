@@ -47,7 +47,7 @@ SELECT
 	odr.sales
 FROM customers ctm
 INNER JOIN orders odr
-ON ctm.id = odr.customer_id
+ON ctm.id = odr.customer_id;
 
 -- Alternative to INNER JOIN using LEFT JOIN
 /* Get all customers along with their orders, 
@@ -56,7 +56,15 @@ SELECT *
 FROM customers AS c
 LEFT JOIN orders AS o
 ON c.id = o.customer_id
-WHERE o.customer_id IS NOT NULL
+WHERE o.customer_id IS NOT NULL;
+
+-- INNER JOIN alternative
+/*All customers along with their orders*/
+SELECT *
+FROM customers as c
+FULL JOIN orders as b
+ON c.id = b.customer_id
+WHERE b.customer_id is NOT NULL AND c.id is NOT NULL;
 
 /* -------------------------------------------------------------------------------
 LEFT JOIN
@@ -69,7 +77,7 @@ SELECT
 	sales
 FROM customers as c
 LEFT JOIN orders as o
-ON c.id = o.customer_id
+ON c.id = o.customer_id;
 
 /* -------------------------------------------------------------------------------
 RIGHT JOIN
@@ -83,7 +91,7 @@ SELECT
 	o.sales
 FROM customers as c
 RIGHT JOIN orders as o
-ON c.id = o.customer_id
+ON c.id = o.customer_id;
 
 -- Alternative to RIGHT JOIN using LEFT JOIN
 /* Get all customers along with their orders, 
@@ -95,7 +103,7 @@ SELECT
 	o.sales
 FROM orders as o
 LEFT JOIN customers as c
-ON c.id = o.customer_id
+ON c.id = o.customer_id;
 
 /* -------------------------------------------------------------------------------
 FULL JOIN
@@ -109,14 +117,16 @@ SELECT
 	o.sales
 FROM orders as o
 FULL JOIN customers as c
-ON c.id = o.customer_id
+ON c.id = o.customer_id;
 
 /* ============================================================================== 
    ADVANCED JOINS
 =============================================================================== */
 
--- LEFT ANTI JOIN
-/* Get all customers who haven't placed any order */
+/* -------------------------------------------------------------------------------
+LEFT ANTI JOIN
+------------------------------------------------------------------------------- */
+-- Get all customers who haven't placed any order 
 -- Return rows from the left that has no match in Right Table
 -- Filter [Combine the data to check.]
 SELECT *
@@ -125,8 +135,11 @@ LEFT JOIN orders as b
 ON c.id = b.customer_id
 WHERE b.customer_id is NULL;
 
--- RIGHT ANTI JOIN
+/* -------------------------------------------------------------------------------
+RIGHT ANTI JOIN
+------------------------------------------------------------------------------- */
 /* Get all orders without matching customers */
+-- There is an order but no customer in the customers table 
 SELECT * 
 FROM customers as c
 RIGHT JOIN orders as o
@@ -139,29 +152,25 @@ SELECT *
 FROM orders AS o 
 LEFT JOIN customers AS c
 ON c.id = o.customer_id
-WHERE c.id IS NULL
+WHERE c.id IS NULL;
 
--- FULL ANTI JOIN
+/* -------------------------------------------------------------------------------
+FULL ANTI JOIN
+------------------------------------------------------------------------------- */
 /* Find customers without orders and orders without customers */
 SELECT *
 FROM customers as c
 FULL JOIN orders as b
 ON c.id = b.customer_id
-WHERE b.customer_id is NULL OR c.id is NULL
+WHERE b.customer_id is NULL OR c.id is NULL;
 
--- INNER JOIN alternative
-/*All customers along with their orders*/
-SELECT *
-FROM customers as c
-FULL JOIN orders as b
-ON c.id = b.customer_id
-WHERE b.customer_id is NOT NULL AND c.id is NOT NULL
-
--- CROSS JOIN
+/* -------------------------------------------------------------------------------
+CROSS JOIN
+------------------------------------------------------------------------------- */
 /* Generate all possible combinations of customers and orders */
 SELECT *
 FROM customers
-CROSS JOIN orders
+CROSS JOIN orders;
 
 /* ============================================================================== 
    MULTIPLE TABLE JOINS (4 Tables)
