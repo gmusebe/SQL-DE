@@ -17,25 +17,23 @@
         - LEFT
         - RIGHT
         - SUBSTRING
-=================================================================================
-*/
 
-/* ============================================================================== 
-Functions are used to:
-1. Clean
-2. Manipulate
-3. Analyze
-4. Transform
+   Functions are used to:
+      1. Clean
+      2. Manipulate
+      3. Analyze
+      4. Transform
 
-A function is an in-bulit SQL code block that:
-a. Accepts and input value
-b. Processes it
-c. Returns an output value
+   A function is an in-bulit SQL code block that:
+      a. Accepts and input value
+      b. Processes it
+      c. Returns an output value
 
-Type of Functions
-- Single-Row functions
-- Multi-Row functions
+   Type of Functions
+      - Single-Row functions
+      - Multi-Row functions
 =============================================================================== */
+USE MyDatabase;
 
 /* ============================================================================== 
    CONCAT() - String Concatenation
@@ -55,25 +53,24 @@ SELECT
 	first_name,
 	country,
 	CONCAT(first_name, ' ', country) AS name_country,
-	LOWER(first_name) AS low_name,
-    UPPER(first_name) AS upp_name
+   UPPER(first_name) AS upp_name,
+   UPPER(CONCAT(first_name, ' ', country)) AS upp_name_country
 FROM customers;
 
 -- LOWER
 SELECT 
 	first_name,
 	country,
-	CONCAT(first_name, ' ', country) AS name_country,
+   CONCAT(first_name, ' ', country ) AS name_country,
 	LOWER(first_name) AS low_name
 FROM customers;
 
 /* ============================================================================== 
-   TRIM() - Remove White Spaces
+TRIM() - Remove White Spaces
 =============================================================================== */
-
 -- Find customers whose first name contains leading or trailing spaces
 SELECT 
-    first_name,
+   first_name,
 	LEN(first_name) len_name,
 	LEN(TRIM(first_name)) len_trim_name,
 	LEN(first_name) - LEN(TRIM(first_name)) flag
@@ -103,7 +100,6 @@ REPLACE('report.txt', '.txt', '.csv') AS new_type;
 /* ============================================================================== 
    LEN() - String Length & Trimming
 =============================================================================== */
-
 -- Calculate the length of each customer's first name
 SELECT 
 	first_name,
@@ -113,7 +109,6 @@ FROM customers;
 /* ============================================================================== 
    LEFT() & RIGHT() - Substring Extraction
 =============================================================================== */
-
 -- Retrieve the first two characters of each first name
 SELECT 
 	first_name,
@@ -137,6 +132,12 @@ SELECT
     SUBSTRING(TRIM(first_name), 2, LEN(TRIM(first_name)))
 FROM customers;
 
+
+SELECT
+   first_name,
+   SUBSTRING(TRIM(first_name), 2, LEN(TRIM(first_name)))
+FROM customers;
+
 -- ROUND
 SELECT 3.512,
 ROUND(3.512, 2) AS round_2;
@@ -154,4 +155,3 @@ SELECT
 first_name, 
 UPPER(LOWER(first_name)) AS nesting
 FROM customers
-
