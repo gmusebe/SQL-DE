@@ -43,7 +43,7 @@
 USE SalesDB;
 
 /* RULE: Data Types
-   The data types of columns in each query should match.
+   The number of columns in each query should match.
 */
 SELECT
     FirstName,
@@ -113,10 +113,9 @@ FROM Sales.Employees;
    SETS: UNION, UNION ALL, EXCEPT, INTERSECT
 ===============================================================================*/
 
-/* TASK 1: 
-   Combine the data from Employees and Customers into one table using UNION 
-*/
-
+/* -------------------------------------------------------------------------------
+TASK 1: Combine the data from Employees and Customers into one table using UNION 
+------------------------------------------------------------------------------- */
 -- UNION: Return all distinct rows from both queries: Removes all duplicates.
 SELECT
 	FirstName AS First_Name,
@@ -128,9 +127,10 @@ SELECT
 	LastName
 FROM Sales.Employees;
 
-/* TASK 2: 
-   Combine the data from Employees and Customers into one table, including duplicates, using UNION ALL 
-*/
+/* -------------------------------------------------------------------------------
+TASK 2: Combine the data from Employees and Customers into one table,
+including duplicates, using UNION ALL 
+------------------------------------------------------------------------------- */
 -- UNION ALL: With Duplicates
 SELECT
 	FirstName AS First_Name,
@@ -142,9 +142,9 @@ SELECT
 	LastName
 FROM Sales.Employees;
 
-/* TASK 3: 
-   Find employees who are NOT customers using EXCEPT 
-*/
+/* -------------------------------------------------------------------------------
+TASK 3: Find employees who are NOT customers using EXCEPT 
+------------------------------------------------------------------------------- */
 -- EXCEPT
 -- Returns all distinct rows from the first query that are not found in the second query
 -- Equivalent to the LEFT Anti-join  in terms of columns
@@ -159,9 +159,9 @@ SELECT
 	LastName
 FROM Sales.Customers;
 
-/* TASK 4: 
-   Find employees who are also customers using INTERSECT 
-*/
+/* -------------------------------------------------------------------------------
+TASK 4: Find employees who are also customers using INTERSECT 
+------------------------------------------------------------------------------- */
 -- INTERSECT
 -- Returns only rows common in both queries (Inner Join😎)
 SELECT
@@ -174,9 +174,9 @@ SELECT
 	LastName
 FROM Sales.Customers;
 
-/* TASK 5: 
-   Combine order data from Orders and OrdersArchive into one report without duplicates 
-*/
+/* -------------------------------------------------------------------------------
+TASK 5: Combine order data from Orders and OrdersArchive into one report without duplicates 
+------------------------------------------------------------------------------- */
 -- USE Cases
 -- #1. Combine similar tables before data analysis
 SELECT
