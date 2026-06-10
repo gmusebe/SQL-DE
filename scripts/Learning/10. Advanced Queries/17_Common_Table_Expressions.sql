@@ -36,6 +36,7 @@ CTE_LastOrder AS (
 	GROUP BY CustomerID
 ),
 CTE_CustomerRank AS (
+	-- Nested CTE
 	-- #Step 3: Rank Customers based on Total Sales Per Customer
 	SELECT 
 		CustomerID,
@@ -44,6 +45,7 @@ CTE_CustomerRank AS (
 	FROM CTE_TotalSales
 ),
 CTE_CustomerSegments AS (
+	-- Nested CTE
 	-- #Step 4: Segment Customers based on their Total Sales
 	SELECT 
 		CustomerID,
